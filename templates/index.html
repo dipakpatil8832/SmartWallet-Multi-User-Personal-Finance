@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f4f9;
+        }
+
+        .container {
+            max-width: 420px;
+            margin: auto;
+            padding: 15px;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #2c7be5, #1a5ed8);
+            color: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .balance-card h3 {
+            margin: 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .balance-card h1 {
+            margin: 10px 0 0;
+            font-size: 32px;
+        }
+
+        .actions {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .action-btn {
+            background: white;
+            border-radius: 12px;
+            padding: 18px;
+            text-align: center;
+            font-weight: 600;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .action-btn:hover {
+            background: #e9f0ff;
+        }
+
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">💳 Dip's Wallet</div>
+
+    <div class="balance-card">
+        <h3>Available Balance</h3>
+        <h1>₹ {{ balance }}</h1>
+    </div>
+
+    <div class="actions">
+        <a class="action-btn" href="/add_balance">➕ Add Balance</a>
+        <a class="action-btn" href="/expense">➖ Add Expense</a>
+        <a class="action-btn" href="/passbook">📒 Passbook</a>
+        <a class="action-btn" href="/monthly">📊 Monthly Report</a>
+    </div>
+
+    <div class="footer">
+        Secure • Simple • Smart
+    </div>
+
+</div>
+
+</body>
+</html>

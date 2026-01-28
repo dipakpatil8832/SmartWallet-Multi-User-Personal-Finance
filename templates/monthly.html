@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Monthly Report</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            background: #f1f4f9;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        .card {
+            max-width: 420px;
+            margin: 30px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 10px;
+            background: #2c7be5;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        th, td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #eef2f7;
+        }
+
+        .summary p {
+            font-weight: bold;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #2c7be5;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>📊 Monthly Report</h2>
+
+    <form method="POST">
+        <input type="number" name="month" placeholder="Month (1-12)" required>
+        <input type="number" name="year" placeholder="Year (YYYY)" required>
+        <button type="submit">Generate Report</button>
+    </form>
+
+    {% if report %}
+    <div class="summary">
+        <p>💰 Total Credit: ₹{{ report.credit }}</p>
+        <p>💸 Total Debit: ₹{{ report.debit }}</p>
+        <p>📈 Net Saving: ₹{{ report.saving }}</p>
+    </div>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Details</th>
+            <th>Credit</th>
+            <th>Debit</th>
+            <th>Balance</th>
+        </tr>
+
+        {% for t in report.rows %}
+        <tr>
+            <td>{{ t.date.strftime("%d-%m-%Y") }}</td>
+            <td>{{ t.note }}</td>
+            {% if t.type == "ADD" %}
+                <td>{{ t.amount }}</td>
+                <td>-</td>
+            {% else %}
+                <td>-</td>
+                <td>{{ t.amount }}</td>
+            {% endif %}
+            <td>{{ t.balance }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+
+    <a href="/" class="home-btn">🏠 Home</a>
+
+</div>
+
+</body>
+</html>

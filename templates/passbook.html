@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wallet Passbook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            margin: 0;
+            padding: 10px;
+        }
+
+        .container {
+            max-width: 100%;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .balance {
+            text-align: center;
+            font-size: 18px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        th {
+            background: #e3e7eb;
+            padding: 8px;
+            border: 1px solid #ccc;
+        }
+
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .credit {
+            color: green;
+            font-weight: bold;
+        }
+
+        .debit {
+            color: red;
+            font-weight: bold;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>📒 Wallet Passbook</h2>
+    <div class="balance">Available Balance: ₹{{ balance }}</div>
+
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Details</th>
+            <th>Credit (₹)</th>
+            <th>Debit (₹)</th>
+            <th>Balance (₹)</th>
+        </tr>
+
+        {% for t in transactions %}
+        <tr>
+            <td>{{ t.date.strftime("%d-%m-%Y") }}</td>
+            <td>{{ t.date.strftime("%H:%M") }}</td>
+            <td>{{ t.note }}</td>
+
+            {% if t.type == "ADD" %}
+                <td class="credit">{{ t.amount }}</td>
+                <td>-</td>
+            {% else %}
+                <td>-</td>
+                <td class="debit">{{ t.amount }}</td>
+            {% endif %}
+
+            <td>{{ t.balance }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <a href="/" class="home-btn">🏠 Home</a>
+
+</div>
+
+</body>
+</html>
