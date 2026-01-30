@@ -11,3 +11,29 @@
     font-weight: bold;
     box-shadow: 0 6px 15px rgba(0,0,0,0.25);
 }
+.dark {
+    background: #121212;
+    color: white;
+}
+
+.dark .balance-card {
+    background: #1e1e1e;
+}
+.flash {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.flash.error {
+    background: #ffe0e0;
+    color: #b30000;
+}
+
+.flash.success {
+    background: #e0ffe8;
+    color: #0f5132;
+}
+

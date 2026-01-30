@@ -9,14 +9,26 @@ def create_tables():
     conn = get_connection()
     cur = conn.cursor()
 
+    # USERS TABLE
+    cur.execute("""
+    CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        username TEXT UNIQUE,
+        password TEXT
+    )
+    """)
+
+    # TRANSACTIONS TABLE (linked to user)
     cur.execute("""
     CREATE TABLE IF NOT EXISTS transactions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER,
         date TEXT,
         type TEXT,
         note TEXT,
         amount REAL,
-        balance REAL
+        balance REAL,
+        FOREIGN KEY(user_id) REFERENCES users(id)
     )
     """)
 
