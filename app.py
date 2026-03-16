@@ -1,4 +1,5 @@
 from flask import Flask, get_flashed_messages, render_template, request, redirect, session
+from werkzeug.security import generate_password_hash, check_password_hash
 from database import get_connection ,create_tables
 from wallet import Wallet
 from flask import flash
