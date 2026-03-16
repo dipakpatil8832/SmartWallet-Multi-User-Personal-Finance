@@ -2,6 +2,7 @@ from flask import Flask, get_flashed_messages, render_template, request, redirec
 from database import get_connection ,create_tables
 from wallet import Wallet
 from flask import flash
+import os
 
 
 app = Flask(__name__)
@@ -42,12 +43,10 @@ def logout():
 # ---------------- WALLET ----------------
     
 @app.route("/")
-def index():
-    if "user_id" not in session:
-        return redirect("/login")
-
-    wallet = Wallet(session["user_id"])  
-    return render_template("index.html", balance=wallet.balance)
+def root():
+    if "user_id" in session:
+        return redirect("/home")
+    return redirect("/login")
 
 @app.route("/home")
 def home():
@@ -179,5 +178,7 @@ def register():
     return render_template("register.html")
 
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port)
