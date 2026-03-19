@@ -3,13 +3,13 @@ import sqlite3
 DB_NAME = "wallet.db"
 
 def get_connection():
-    return sqlite3.connect(DB_NAME)
+     return sqlite3.connect(DB_NAME, check_same_thread=False)
 
 def create_tables():
     conn = get_connection()
     cur = conn.cursor()
 
-
+    
     cur.execute("""
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
