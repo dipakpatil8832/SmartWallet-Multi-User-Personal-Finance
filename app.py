@@ -9,9 +9,8 @@ import os
 app = Flask(__name__)
 app.secret_key = "super-secret-key"
 
-create_tables()   # ✅ allowed here (NO session)
+create_tables()   
 
-# ---------------- AUTH ----------------
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -41,7 +40,7 @@ def logout():
     session.clear()
     return redirect("/login")
 
-# ---------------- WALLET ----------------
+
     
 @app.route("/")
 def root():
@@ -145,7 +144,7 @@ def register():
         username = request.form["username"]
         password_raw = request.form["password"]
         
-        # Password validation
+        
         if len(password_raw) < 6:
             flash("Password must be at least 6 characters", "error")
             return redirect("/register")
@@ -153,7 +152,7 @@ def register():
         conn = get_connection()
         cur = conn.cursor()
 
-        # 👇 CHECK IF USERNAME EXISTS
+        
         cur.execute("SELECT id FROM users WHERE username = ?", (username,))
         existing_user = cur.fetchone()
 
@@ -162,7 +161,7 @@ def register():
             flash("Username already exists. Please choose another.", "error")
             return redirect("/register")
 
-        # Hash password AFTER all checks
+        
         password = generate_password_hash(password_raw)
 
         cur.execute(

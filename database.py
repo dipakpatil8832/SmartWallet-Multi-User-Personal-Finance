@@ -9,7 +9,7 @@ def create_tables():
     conn = get_connection()
     cur = conn.cursor()
 
-    # USERS TABLE
+
     cur.execute("""
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -18,7 +18,7 @@ def create_tables():
     )
     """)
 
-    # TRANSACTIONS TABLE (linked to user)
+    
     cur.execute("""
     CREATE TABLE IF NOT EXISTS transactions (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
